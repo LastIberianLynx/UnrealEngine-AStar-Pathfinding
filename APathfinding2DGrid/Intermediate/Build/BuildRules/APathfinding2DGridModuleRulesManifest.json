@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\Joey\\Documents\\Unreal Projects\\APathfinding2DGrid\\Source\\APathfinding2DGrid\\APathfinding2DGrid.Build.cs",
+		"C:\\Users\\Joey\\Documents\\Unreal Projects\\APathfinding2DGrid\\Source\\APathfinding2DGrid.Target.cs",
+		"C:\\Users\\Joey\\Documents\\Unreal Projects\\APathfinding2DGrid\\Source\\APathfinding2DGridEditor.Target.cs"
+	],
+	"EngineVersion": "4.27.2"
+}

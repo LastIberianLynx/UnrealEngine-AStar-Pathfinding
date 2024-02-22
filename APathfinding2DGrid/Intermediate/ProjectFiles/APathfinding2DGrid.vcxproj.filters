@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\APathfinding2DGrid.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F8DCA16C-F25C-44B2-860A-BB109DF03409}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\APathfinding2DGrid.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\APathfinding2DGridEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{7F8FF3CA-6423-43C4-8762-A46C67049D82}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\APathfinding2DGrid">
+      <UniqueIdentifier>{ACB17BF5-5E42-427A-B4D2-FBA515FC4683}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\APathfinding2DGrid\APathfinding2DGrid.Build.cs">
+      <Filter>Source\APathfinding2DGrid</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\APathfinding2DGrid\APathfinding2DGrid.cpp">
+      <Filter>Source\APathfinding2DGrid</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\APathfinding2DGrid\APathfinding2DGrid.h">
+      <Filter>Source\APathfinding2DGrid</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\APathfinding2DGrid\APathfinding2DGridGameModeBase.cpp">
+      <Filter>Source\APathfinding2DGrid</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\APathfinding2DGrid\APathfinding2DGridGameModeBase.h">
+      <Filter>Source\APathfinding2DGrid</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\APathfinding2DGrid\GridAStar.cpp">
+      <Filter>Source\APathfinding2DGrid</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\APathfinding2DGrid\GridAStar.h">
+      <Filter>Source\APathfinding2DGrid</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

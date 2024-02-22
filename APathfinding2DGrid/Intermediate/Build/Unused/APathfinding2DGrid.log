@@ -1,0 +1,11 @@
+﻿  Building APathfinding2DGridEditor...
+  Using Visual Studio 2019 14.29.30037 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037) and Windows 10.0.18362.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+  Building 4 actions with 12 processes...
+    [1/4] GridAStar.cpp
+    [2/4] UE4Editor-APathfinding2DGrid-Win64-DebugGame.lib
+       Creating library C:\Users\Joey\Documents\Unreal Projects\APathfinding2DGrid\Intermediate\Build\Win64\UE4Editor\DebugGame\APathfinding2DGrid\UE4Editor-APathfinding2DGrid-Win64-DebugGame.lib and object C:\Users\Joey\Documents\Unreal Projects\APathfinding2DGrid\Intermediate\Build\Win64\UE4Editor\DebugGame\APathfinding2DGrid\UE4Editor-APathfinding2DGrid-Win64-DebugGame.exp
+    [3/4] UE4Editor-APathfinding2DGrid-Win64-DebugGame.dll
+       Creating library C:\Users\Joey\Documents\Unreal Projects\APathfinding2DGrid\Intermediate\Build\Win64\UE4Editor\DebugGame\APathfinding2DGrid\UE4Editor-APathfinding2DGrid-Win64-DebugGame.suppressed.lib and object C:\Users\Joey\Documents\Unreal Projects\APathfinding2DGrid\Intermediate\Build\Win64\UE4Editor\DebugGame\APathfinding2DGrid\UE4Editor-APathfinding2DGrid-Win64-DebugGame.suppressed.exp
+    [4/4] APathfinding2DGridEditor-Win64-DebugGame.target
+  Total time in Parallel executor: 1.34 seconds
+  Total execution time: 1.79 seconds

@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "APathfinding2DGrid",
+			"Path": "C:\\Users\\Joey\\Documents\\Unreal Projects\\APathfinding2DGrid\\Source\\APathfinding2DGrid.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "APathfinding2DGridEditor",
+			"Path": "C:\\Users\\Joey\\Documents\\Unreal Projects\\APathfinding2DGrid\\Source\\APathfinding2DGridEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}

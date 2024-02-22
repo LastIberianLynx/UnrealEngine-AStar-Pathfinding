@@ -1,0 +1,17 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-APathfinding2DGrid.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\Joey\Documents\Unreal Projects\APathfinding2DGrid\Intermediate\Build\Win64\APathfinding2DGridEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"C:\Users\Joey\Documents\Unreal Projects\APathfinding2DGrid\Intermediate\Build\Win64\UE4Editor\Development\APathfinding2DGrid\APathfinding2DGrid.cpp.obj"
+"C:\Users\Joey\Documents\Unreal Projects\APathfinding2DGrid\Intermediate\Build\Win64\UE4Editor\Development\APathfinding2DGrid\APathfinding2DGridGameModeBase.cpp.obj"
+"C:\Users\Joey\Documents\Unreal Projects\APathfinding2DGrid\Intermediate\Build\Win64\UE4Editor\Development\APathfinding2DGrid\GridAStar.cpp.obj"
+"C:\Users\Joey\Documents\Unreal Projects\APathfinding2DGrid\Intermediate\Build\Win64\UE4Editor\Development\APathfinding2DGrid\APathfinding2DGrid.init.gen.cpp.obj"
+"C:\Users\Joey\Documents\Unreal Projects\APathfinding2DGrid\Intermediate\Build\Win64\UE4Editor\Development\APathfinding2DGrid\APathfinding2DGridGameModeBase.gen.cpp.obj"
+"C:\Users\Joey\Documents\Unreal Projects\APathfinding2DGrid\Intermediate\Build\Win64\UE4Editor\Development\APathfinding2DGrid\GridAStar.gen.cpp.obj"
+"C:\Users\Joey\Documents\Unreal Projects\APathfinding2DGrid\Intermediate\Build\Win64\UE4Editor\Development\APathfinding2DGrid\Default.rc2.res"
+/OUT:"C:\Users\Joey\Documents\Unreal Projects\APathfinding2DGrid\Intermediate\Build\Win64\UE4Editor\Development\APathfinding2DGrid\UE4Editor-APathfinding2DGrid.lib"
