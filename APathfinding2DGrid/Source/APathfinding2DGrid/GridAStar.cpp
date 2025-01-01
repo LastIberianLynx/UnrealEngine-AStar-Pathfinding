@@ -116,13 +116,12 @@ TArray<FMvNode> AGridAStar::GetNeighbors(FMvNode& currentNode)
 void AGridAStar::Solve_AStar()
 {
 
-	for (int32 i = 0; i < Nodes.Num(); i++) {
-		FMvNode* Node = &Nodes[i];
-		Node->bVisited = false;
-		Node->fGlobalGoal = 99000000; //infinity
-		Node->fLocalGoal = 99000000; //infinity
-		Node->parent = nullptr;
-	}
+	double StartTime = FPlatformTime::Seconds();
+	FDateTime Time1 = FDateTime::Now();
+
+	// List to track nodes used in the calculation
+	// Optimization suggested by u/EpochVanquisher
+	TSet<FMvNode*> usedNodes;
 
 	auto distance = [](FMvNode* a, FMvNode* b) {
 		return sqrtf((a->X - b->X) * (a->X - b->X) + (a->Y - b->Y) * (a->Y - b->Y));
@@ -137,50 +136,138 @@ void AGridAStar::Solve_AStar()
 	nodeStart->fGlobalGoal = heuristic(nodeStart, nodeEnd);
 
 	TArray<FMvNode*> listNotTestedNodes;
-	listNotTestedNodes.Add(nodeStart); //initialize search by pushing the first node to the array.
+	listNotTestedNodes.Add(nodeStart);
 
-	while (listNotTestedNodes.Num() > 0 && nodeCurrent != nodeEnd)
-	{
+	while (listNotTestedNodes.Num() > 0 && nodeCurrent != nodeEnd) {
 		// Sort Untested nodes by global goal, so lowest is first
 		listNotTestedNodes.Sort([](const FMvNode& lhs, const FMvNode& rhs) { return lhs.fGlobalGoal < rhs.fGlobalGoal; });
 
-		// Front of listNotTestedNodes is potentially the lowest distance node. Our
-		// list may also contain nodes that have been visited, so ditch these...
+		// Remove already visited nodes
 		while (listNotTestedNodes.Num() > 0 && listNotTestedNodes[0]->bVisited)
 			listNotTestedNodes.RemoveAt(0);
 
-		// ...or abort because there are no valid nodes left to test
 		if (listNotTestedNodes.Num() == 0)
 			break;
 
 		nodeCurrent = listNotTestedNodes[0];
-		nodeCurrent->bVisited = true; // We only explore a node once
+		nodeCurrent->bVisited = true; // Mark as visited
+		usedNodes.Add(nodeCurrent);   // Track this node
 
 		for (auto nodeNeighbor : nodeCurrent->Neighbors) {
-
 			if (!nodeNeighbor->bVisited && nodeNeighbor->bObstacle == 0) {
-				listNotTestedNodes.Add(nodeNeighbor);
+				if (nodeNeighbor->Unit == nullptr)
+					listNotTestedNodes.Add(nodeNeighbor);
+				else if (nodeNeighbor->Unit->PlayerPawn != Unit->PlayerPawn)
+					listNotTestedNodes.Add(nodeNeighbor);
 			}
 
 			float fPossiblyLowerGoal = nodeCurrent->fLocalGoal + distance(nodeCurrent, nodeNeighbor);
 
-			if (fPossiblyLowerGoal < nodeNeighbor->fLocalGoal)
-			{
+			if (fPossiblyLowerGoal < nodeNeighbor->fLocalGoal) {
 				nodeNeighbor->parent = nodeCurrent;
 				nodeNeighbor->fLocalGoal = fPossiblyLowerGoal;
-
 				nodeNeighbor->fGlobalGoal = nodeNeighbor->fLocalGoal + heuristic(nodeNeighbor, nodeEnd);
+				usedNodes.Add(nodeNeighbor); // Track this node
 			}
 		}
 	}
-	
-	//Will go through all the nodes, parent by parent from the end to the star.
-	//Here we can store them in an array and return the nodes and their location, so we have a path.
+
 	FMvNode* p = nodeEnd;
+	TArray<FMvNode*> NodePath;
+	NodePath.Add(p);
+
 	while (p->parent != nullptr) {
-		DrawDebugLine(GetWorld(), p->WorldLocation, p->parent->WorldLocation, FColor::Magenta, false, 30.f, 40.f);
+		DrawDebugLine(GetWorld(), p->WorldLocation, p->parent->WorldLocation, FColor::Magenta, false, 6.f, 16.f);
 		p = p->parent;
+		NodePath.Add(p);
 	}
+
+	// Reset only the nodes that were used
+	for (FMvNode* node : usedNodes) {
+		node->bVisited = false;
+		node->fGlobalGoal = 3000000;
+		node->fLocalGoal = 3000000;
+		node->parent = nullptr;
+	}
+
+	double EndTime = FPlatformTime::Seconds();
+	double ExecutionTime = EndTime - StartTime;
+
+	FDateTime Time2 = FDateTime::Now();
+	FTimespan ExecutionTime2 = Time2 - Time1;
+
+	double ExecutionTimeMilliseconds = ExecutionTime2.GetTotalMilliseconds();
+	return NodePath;
+
+
+
+	//for (int32 i = 0; i < Nodes.Num(); i++) {
+	//	FMvNode* Node = &Nodes[i];
+	//	Node->bVisited = false;
+	//	Node->fGlobalGoal = 99000000; //infinity
+	//	Node->fLocalGoal = 99000000; //infinity
+	//	Node->parent = nullptr;
+	//}
+
+	//auto distance = [](FMvNode* a, FMvNode* b) {
+	//	return sqrtf((a->X - b->X) * (a->X - b->X) + (a->Y - b->Y) * (a->Y - b->Y));
+	//};
+
+	//auto heuristic = [distance](FMvNode* a, FMvNode* b) {
+	//	return distance(a, b);
+	//};
+
+	//FMvNode* nodeCurrent = nodeStart;
+	//nodeStart->fLocalGoal = 0.f;
+	//nodeStart->fGlobalGoal = heuristic(nodeStart, nodeEnd);
+
+	//TArray<FMvNode*> listNotTestedNodes;
+	//listNotTestedNodes.Add(nodeStart); //initialize search by pushing the first node to the array.
+
+	//while (listNotTestedNodes.Num() > 0 && nodeCurrent != nodeEnd)
+	//{
+	//	// Sort Untested nodes by global goal, so lowest is first
+	//	listNotTestedNodes.Sort([](const FMvNode& lhs, const FMvNode& rhs) { return lhs.fGlobalGoal < rhs.fGlobalGoal; });
+
+	//	// Front of listNotTestedNodes is potentially the lowest distance node. Our
+	//	// list may also contain nodes that have been visited, so ditch these...
+	//	while (listNotTestedNodes.Num() > 0 && listNotTestedNodes[0]->bVisited)
+	//		listNotTestedNodes.RemoveAt(0);
+
+	//	// ...or abort because there are no valid nodes left to test
+	//	if (listNotTestedNodes.Num() == 0)
+	//		break;
+
+	//	nodeCurrent = listNotTestedNodes[0];
+	//	nodeCurrent->bVisited = true; // We only explore a node once
+
+	//	for (auto nodeNeighbor : nodeCurrent->Neighbors) {
+
+	//		if (!nodeNeighbor->bVisited && nodeNeighbor->bObstacle == 0) {
+	//			listNotTestedNodes.Add(nodeNeighbor);
+	//		}
+
+	//		float fPossiblyLowerGoal = nodeCurrent->fLocalGoal + distance(nodeCurrent, nodeNeighbor);
+
+	//		if (fPossiblyLowerGoal < nodeNeighbor->fLocalGoal)
+	//		{
+	//			nodeNeighbor->parent = nodeCurrent;
+	//			nodeNeighbor->fLocalGoal = fPossiblyLowerGoal;
+
+	//			nodeNeighbor->fGlobalGoal = nodeNeighbor->fLocalGoal + heuristic(nodeNeighbor, nodeEnd);
+	//		}
+	//	}
+	//}
+
+	////Will go through all the nodes, parent by parent from the end to the star.
+	////Here we can store them in an array and return the nodes and their location, so we have a path.
+	//FMvNode* p = nodeEnd;
+	//while (p->parent != nullptr) {
+	//	DrawDebugLine(GetWorld(), p->WorldLocation, p->parent->WorldLocation, FColor::Magenta, false, 30.f, 40.f);
+	//	p = p->parent;
+	//}
+
+
 
 }
 
